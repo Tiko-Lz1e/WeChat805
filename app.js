@@ -6,12 +6,14 @@ var logger = require('morgan');
 
 //wechat
 var config = require('./config');
+var wechat = require('wechat');
 
 //crypto
 var crypto = require('crypto');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var WeChatRouter = require('./routes/WeChat');
 
 var app = express();
 
@@ -24,9 +26,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.query());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/WeChat', WeChatRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
