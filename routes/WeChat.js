@@ -40,6 +40,7 @@ router.all('/', wechat(config, function (req, res, next) {
                 }
             });
             break;
+        case "zy":
         case "ddl":
         case "作业":
             content = rf.readFileSync("public/text/homework","utf-8");
