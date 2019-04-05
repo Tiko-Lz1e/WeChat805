@@ -21,14 +21,16 @@ var pics = ['stBEFudMK9Unn2euiY4xYvTdRnpV7XfNsHbMEyZAsnTxJ6lSZQJRMQXEs0HZoBdN',
 router.all('/', wechat(config, function (req, res, next) {
     // 微信输入信息都在req.weixin上
     var message = req.weixin;
-    var content='公众号功能更新中';
+    var content='公众号功能更新中，欢迎提交issue';
 
     switch(message.Content){
+        case "kb":
+        case "课表":
         case "课程表":
             res.reply({
                 type: "image",
                 content: {
-                    mediaId: 'xotx8ge9KFo44o10hUQ8PmMr_9wrVpomh7sZYyfWpuJ8ORn0gEeVwO0epmTqzH5U'
+                    mediaId: 'NqSHJs10p7v-KIR8Lxmgi1Y41xcQcxJHYhdmCqpTTWZGVBW7GBW-954FwqGkqycm'
                 }
             });
             break;
@@ -54,6 +56,7 @@ router.all('/', wechat(config, function (req, res, next) {
             content = rf.readFileSync("public/text/homework2","utf-8");
             res.reply(content);
             break;
+        case "help":
         case "帮助":
             content = rf.readFileSync("public/text/help","utf-8");
             res.reply(content);
