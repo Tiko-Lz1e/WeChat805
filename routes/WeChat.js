@@ -16,6 +16,7 @@ var config = {
 var pics = ['stBEFudMK9Unn2euiY4xYvTdRnpV7XfNsHbMEyZAsnTxJ6lSZQJRMQXEs0HZoBdN',
             'C8MBMQ5GNXsQdy0Y5DucRsryOJczxp2TmBZ8ayvlXJ6qF3WDeV502Ge4r_BTJoxW',
             'gA0rBAlMLNDrudr-2jYDZhgMozAKZlHb80LfwJ3AyR6H4pl3D815rmAI75mH-Caq',
+            '1V_U4ufuPonrsXcIoc1v4SaLhEooYslAnURXoNcVDET1p7tcxIcZ4gSGeZnZNXHU',
             ];
 
 router.all('/', wechat(config, function (req, res, next) {
@@ -48,10 +49,12 @@ router.all('/', wechat(config, function (req, res, next) {
             content = rf.readFileSync("public/text/homework","utf-8");
             res.reply(content);
             break;
+        case "作业一":
         case "作业1":
             content = rf.readFileSync("public/text/homework1","utf-8");
             res.reply(content);
             break;
+        case "作业二":
         case "作业2":
             content = rf.readFileSync("public/text/homework2","utf-8");
             res.reply(content);
@@ -63,6 +66,10 @@ router.all('/', wechat(config, function (req, res, next) {
             break;
         case "后端代码":
             content = 'https://github.com/Twx1213/WeChat805';
+            res.reply(content);
+            break;
+        case "啦啦啦":
+            content = rf.readFileSync("public/text/啦啦啦","utf-8");
             res.reply(content);
             break;
         default:

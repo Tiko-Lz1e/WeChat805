@@ -9,7 +9,7 @@ var crypto = require('crypto');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('Totally new life');
+  res.render('index', {title: 'Helloworld!'});
 
 });
 
