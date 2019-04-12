@@ -1,8 +1,14 @@
+
 var express = require('express');
 var router = express.Router();
 //wechat
 var configs = require('../config');
+var TokenFile = require('../Token');
 var wechat = require('wechat');
+var GetToken = require('./GetToken');
+var request = require('request');
+var getidFIle = require('../public/image/imageId');
+var getidJS = require('../public/image/getid');
 var rf=require("fs");
 
 //crypto
@@ -19,7 +25,10 @@ var pics = ['stBEFudMK9Unn2euiY4xYvTdRnpV7XfNsHbMEyZAsnTxJ6lSZQJRMQXEs0HZoBdN',
             '1V_U4ufuPonrsXcIoc1v4SaLhEooYslAnURXoNcVDET1p7tcxIcZ4gSGeZnZNXHU',
             ];
 
+var currentTime = new Date().getTime();
+
 router.all('/', wechat(config, function (req, res, next) {
+
     // 微信输入信息都在req.weixin上
     var message = req.weixin;
     var content='公众号功能更新中，欢迎提交issue';
@@ -31,18 +40,22 @@ router.all('/', wechat(config, function (req, res, next) {
             res.reply({
                 type: "image",
                 content: {
-                    mediaId: 'NqSHJs10p7v-KIR8Lxmgi1Y41xcQcxJHYhdmCqpTTWZGVBW7GBW-954FwqGkqycm'
+                    mediaId: getidFIle.kb7.imageID
                 }
             });
+            if(getidFIle.kb7.time < currentTime){
+                getidJS.GetImageId('kb7');
+            }
+
             break;
-        case "沙雕图":
+ /*       case "沙雕图":
             res.reply({
                 type: "image",
                 content: {
                     mediaId: pics[Math.floor(Math.random()*pics.length)]
                 }
             });
-            break;
+            break;*/
         case "zy":
         case "ddl":
         case "作业":
@@ -59,6 +72,7 @@ router.all('/', wechat(config, function (req, res, next) {
             content = rf.readFileSync("public/text/homework2","utf-8");
             res.reply(content);
             break;
+        case "-h":
         case "help":
         case "帮助":
             content = rf.readFileSync("public/text/help","utf-8");
@@ -76,5 +90,8 @@ router.all('/', wechat(config, function (req, res, next) {
             res.reply(content);
     }
 }));
+
+
+
 
 module.exports = router;
